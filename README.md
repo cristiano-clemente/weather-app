@@ -8,7 +8,7 @@ Upon selecting a location, he should be able to check the forecast for the next 
 
 We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
 
-## [Moment](https://momentjs.com/) - handle and format dates
+## [moment](https://momentjs.com/)
 
 ```bash
 npm install moment
@@ -21,13 +21,11 @@ const date = new Date(); // "Mon Nov 15 2020 11:11:02 GMT+0000 (Western European
 moment(date).format('MMMM Do YYYY, h:mm:ss a'); // "November 15th 2020, 11:11:02 pm"
 ```
 
-## [Material-UI](https://material-ui.com/) - polished and cohesive ui components
+## [material-ui](https://material-ui.com/)
 
 ```bash
 npm install @material-ui/core @material-ui/icons @material-ui/lab
 ```
-
-Usage example:
 
 ```JSX
 import React from 'react';
@@ -118,7 +116,7 @@ export default function ForecastLocationDetails({ woeid }) {
 }
 ```
 
-## [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl)
+## [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl) + [mapbox-gl](https://docs.mapbox.com/mapbox-gl-js/api/)
 
 ```bash
 npm install react-mapbox-gl mapbox-gl
