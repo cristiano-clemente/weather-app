@@ -8,15 +8,11 @@ Upon selecting a location, he should be able to check the forecast for the next 
 
 We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
 
-## Moment
-
-[Moment](https://momentjs.com/) is the most used package to handle and format dates.
+## [Moment](https://momentjs.com/) - handle and format dates
 
 ```bash
 npm install moment
 ```
-
-Usage example
 
 ```JavaScript
 import moment from 'moment';
@@ -25,10 +21,7 @@ const date = new Date(); // "Mon Nov 15 2020 11:11:02 GMT+0000 (Western European
 moment(date).format('MMMM Do YYYY, h:mm:ss a'); // "November 15th 2020, 11:11:02 pm"
 ```
 
-## Material-UI
-
-[Material](https://material-ui.com/) is a well known and very popular library of polished UI components that can easily be reused.
-All components follow an underlying theme, keeping our application with a consistent look and feel.
+## [Material-UI](https://material-ui.com/) - polished and cohesive ui components
 
 ```bash
 npm install @material-ui/core @material-ui/icons @material-ui/lab
@@ -81,33 +74,13 @@ export default function SimpleCard() {
 };
 ```
 
-Material-UI brings along dozens of components that cover a fairly amount of scenarios and the following root components will be quite useful during our development:
-
-- [Autocomplete](https://material-ui.com/components/autocomplete) - Input with suggestions;
-- [Card](https://material-ui.com/components/cards/) - Material-UI's root Card component;
-- [Grid](https://material-ui.com/components/grid/) - Easy manage a 12 columns layout;
-- [Typography](https://material-ui.com/components/typography/) - Wrapper for all kind of text, with a huge set of variants to fit titles, paragraphs, etc;
-
-## axios + react-query
-
-Until now, our forecast comes only from the sample files, but ideally, we should be fetching the data directly from [MetaWeather](https://www.metaweather.com/), but this is where it gets complicated.
-
-MetaWeather API doesn't have [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) enabled, so our browser will refuse to fetch data from it. As a work around, we can use [`local-cors-proxy`](https://github.com/garmeeh/local-cors-proxy#readme) to proxy the request and trick our browser.
+## [axios](https://github.com/axios/axios#axios) + [local-cors-proxy](https://github.com/garmeeh/local-cors-proxy#readme) + [react-query](https://github.com/tannerlinsley/react-query#visit-react-querytanstackcom-for-docs-guides-api-and-more)
 
 ```bash
 npm install -g local-cors-proxy
 lcp --origin http://localhost:3000 --proxyUrl https://www.metaweather.com
-```
-
-In order to perform request to MetaWeather, [axios](https://github.com/axios/axios#axios) is definitely the right tool for the job.
-
-[react-query](https://github.com/tannerlinsley/react-query#visit-react-querytanstackcom-for-docs-guides-api-and-more) streamlines the usage of axios, so that it works as any other hook.
-
-```bash
 npm install axios react-query
 ```
-
-Simple example, performing a request to MetaWeather to fetch a locations data through its _woeid_:
 
 ```JavaScript
 import axios from 'axios';
@@ -145,30 +118,11 @@ export default function ForecastLocationDetails({ woeid }) {
 }
 ```
 
-## react-mapbox-gl
-
-A map would be a great addition to our weather app. Since MetaWeather provides the latitude and longitude of a location, it would be nice to focus that location on a map.
-
-It would be a bit awkward to make plans for a nice weekend BBQ based on the forecast for [Lisbon, Florida](https://en.wikipedia.org/wiki/Lisbon,_Florida) or some other [Lisbon](<https://en.wikipedia.org/wiki/Lisbon_(disambiguation)#United_States>), just in the USA.
-
-As you can imagine, there are quite a few components at our disposal, and we suggest the usage of [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl).
-It is quite simple to integrate and to display a point at a certain latitude and longitude.
-Feel free to play with their [demos](https://alex3165.github.io/react-mapbox-gl/demos) to get a feeling about how it works and look around their [documentation](https://alex3165.github.io/react-mapbox-gl/documentation).
-The most important components to focus upon a location would be `ReactMapboxGl`, `Layer` and `Feature`.
-
-We can install it into our project with:
+## [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl)
 
 ```bash
 npm install react-mapbox-gl mapbox-gl
 ```
-
-In order to use react-mapbox-gl, we will need an accessToken, that we already requested:
-
-```
-pk.eyJ1IjoicHNpbHZhaWMiLCJhIjoiY2tobmI5YTRlMDAzbTMxcGV6NDk3ZHNrdCJ9.mpgz1tj9j8cLrhrsZ5hlhw
-```
-
-The snippet bellow we displays how we can create a Map, with the provide accessToken, that will focus upon Lisbon, Portugal and place a small marker:
 
 ```JavaScript
 
