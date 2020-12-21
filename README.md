@@ -1,91 +1,14 @@
-# Table of contents
+# Building a Weather app
 
-- [Setup](#setup) - General instructions to install Node v15;
-- [Bootstrapping](#bootstrapping) - Instructions to get the application running;
-- [A few goodies](#a-few-goodies) - Brief list of useful packages;
-- [Building a Weather app](#building-a-weather-app) - Detailed description of the desired functionallities;
-- [Next steps](#next-steps) - Suggestions of further challenges to enhance our Weather app.
+Our weather app will consist of an [SPA](https://en.wikipedia.org/wiki/Single-page_application) that will display the current forecast details and the next few days' forecast, for a selected location.
 
-# Setup
+Users should be allowed to search for a location. This search will guide our users, displaying possible locations containing the users' query as he types.
 
-Make sure you have Node v15 installed and ready to go, either download it directly from its [download page](https://nodejs.org/en/download/current/), or through [`nvm`](https://github.com/nvm-sh/nvm), which we recommend for both Linux and macOS.
+Upon selecting a location, he should be able to check the forecast for the next 5 days and the details of today's weather report.
 
-Follow the next set of instructions to complete your setup with `nvm`.
+We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
 
-## NVM
-
-### Install Node v15:
-
-```bash
-nvm install 15.2.0
-```
-
-### Select Node v15
-
-```bash
-nvm use 15.2.0
-```
-
-### Validate that Node v15 is installed and available
-
-```bash
-node --version
-> v15.2.0
-```
-
-# Bootstrapping
-
-## Globally install **create-react-app** through npm
-
-[`create-react-app`](https://reactjs.org/docs/create-a-new-react-app.html) is a Node package curated by Facebook, that can be used to create a new React project, with the required support scripts and dependencies.
-
-```bash
-npm install -g create-react-app
-```
-
-Note: The `-g` flag lets npm know to install it globally.
-
-## Create a React application
-
-```bash
-create-react-app weather-app
-```
-
-And we have just created a new React project, that is almost ready to run.
-Please take a few minutes browsing the generated files inside weather-app folder, mainly:
-
-- `package.json` - npm relies on this file for all of its iteration, from dependencies to available scripts;
-- `./src/App.js` - The main component of the generated application;
-- `./src/index.js` - Root of our web application, where `App` is mounted;
-- `README.me` - Description of the generated project.
-
-## Launching the application
-
-### Installing dependencies
-
-Before we launch our application, ensure that you have React v16 installed. By default, `create-react-app` creates a React v17 application. This version doesn't bring anything _new_, so we won't miss anything by downgrading to React v16, which we need in order to use Material-UI.
-
-```bash
-npm install react@^16.14.0 react-dom@16.14.0
-```
-
-### Lunching our react application
-
-We can now run the application on development mode.
-
-```bash
-npm start
-```
-
-The web application should be now running and accessible on a browser through [http://localhost:3000](http://localhost:3000).
-
-The page will reload if you make any changes and will show any errors in the browser's console.
-
-# A few goodies
-
-Before we start hacking away our weather application, we will take advantage of a few packages that will speed up our development.
-
-## Install **Moment**
+## Moment
 
 [Moment](https://momentjs.com/) is the most used package to handle and format dates.
 
@@ -102,7 +25,7 @@ const date = new Date(); // "Mon Nov 15 2020 11:11:02 GMT+0000 (Western European
 moment(date).format('MMMM Do YYYY, h:mm:ss a'); // "November 15th 2020, 11:11:02 pm"
 ```
 
-## Install **Material-UI**
+## Material-UI
 
 [Material](https://material-ui.com/) is a well known and very popular library of polished UI components that can easily be reused.
 All components follow an underlying theme, keeping our application with a consistent look and feel.
@@ -165,67 +88,7 @@ Material-UI brings along dozens of components that cover a fairly amount of scen
 - [Grid](https://material-ui.com/components/grid/) - Easy manage a 12 columns layout;
 - [Typography](https://material-ui.com/components/typography/) - Wrapper for all kind of text, with a huge set of variants to fit titles, paragraphs, etc;
 
-# Building a Weather app
-
-Our weather app will consist of an [SPA](https://en.wikipedia.org/wiki/Single-page_application) that will display the current forecast details and the next few days' forecast, for a selected location.
-
-Users should be allowed to search for a location. This search will guide our users, displaying possible locations containing the users' query as he types.
-
-Upon selecting a location, he should be able to check the forecast for the next 5 days and the details of today's weather report.
-
-We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
-We have sampled the response for a possible search and location's forecast to simplify our development.
-
-In the `sample` folder, the next examples are available:
-
-- [`search.json`](./src/samples/search.json) - Available locations for the search query `li`;
-- [`weatherReports.json`](./src/samples/weatherReports.json) - Weather reports for the locations available in `search.json`.
-
-They can be imported and used in the application:
-
-```JavaScript
-import searchSample from "./sample/search.json";
-```
-
-The next sections we will further detail the behavior and role of each element of our interface and supply tips in how to proceed.
-These tips are only tips and nothing more, feel free to explore Material-UI's components to shape the interface to suit your taste.
-
-## Setting up a layout
-
-Before jumping into more concrete blocks of our application we have to setup a general layout, it will work as the foundations of the interface and split it into sections where we will place the other elements.
-
-[Grid](https://material-ui.com/components/grid/) from Material-UI is quite handy to achieve such behavior. It creates a wrapper container with 12 columns, allowing a quick establishment of sections with a fixed set of columns for a specified resolution. Grid will adjust its sub-components to fit the current resolution following the provided props.
-
-## Searching for a location
-
-This element consist of an input to type a location.
-
-It will guide our user, displaying suggestions of locations that suit the provide input.
-
-[Material-UI's Autocomplete](https://material-ui.com/components/autocomplete) component suits this task. It is capable of providing suggestions from a existing source and filtering them to match the input. Also provides a mechanism to establish the behavior for click actions.
-
-## Displaying the forecast for the next few days
-
-Upon selecting a location trough the search, this section should render a set o elements to display the forecast for the next 5 days.
-
-This should display a summary, with the following information:
-
-- Day of the forecast;
-- Weather forecast, sunny, rainy, etc;
-- Max temperature;
-- Min temperature;
-
-The forecast for the next 5 days can be found in the sample file, `weatherReports.json`, in the attribute `consolidated_weather`.
-
-[Card](https://material-ui.com/components/cards/) component are simple and effective ways of displaying this kind of information.
-
-## Displaying detailed view for today's forecast
-
-This section should display the details of today's forecast, with all the information available, from current temperature to degree of humidity.
-
-# Next steps
-
-## Fetch data directly from the API
+## axios + react-query
 
 Until now, our forecast comes only from the sample files, but ideally, we should be fetching the data directly from [MetaWeather](https://www.metaweather.com/), but this is where it gets complicated.
 
@@ -282,7 +145,7 @@ export default function ForecastLocationDetails({ woeid }) {
 }
 ```
 
-## Setting up a map
+## react-mapbox-gl
 
 A map would be a great addition to our weather app. Since MetaWeather provides the latitude and longitude of a location, it would be nice to focus that location on a map.
 
@@ -333,9 +196,3 @@ function MyMap() {
   )
 }
 ```
-
-# Important links for the workshop
-
-Autocomplete - https://material-ui.com/components/autocomplete
-Grid Component - https://material-ui.com/components/grid/
-Card Component - https://material-ui.com/components/cards/
