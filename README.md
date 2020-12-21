@@ -334,42 +334,6 @@ function MyMap() {
 }
 ```
 
-#FIXME
-
-# Check version: react needs to be >=16
-
-npm view node version
-npm view react version
-
-# Update node.js version:
-
-nvm install node --reinstall-packages-from=node
-
-# Use right version of node
-
-nvm use node 15
-
-# Instalall create-react-app:
-
-npm install -g create-react-app
-
-# Install momento for data aspects
-
-npm install moment --save
-
-# Create a react app:
-
-create-react-app weather_app
-
-# Install all o material ui and icons:
-
-npm install @material-ui/core
-npm install @material-ui/icons
-npm install @material-ui/lab
-
-#instalar react developer tools
-https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
-
 # Important links for the workshop
 
 Autocomplete - https://material-ui.com/components/autocomplete
