@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import InfoDisplay from "./InfoDisplay.js";
+import InfoDisplay from "./InfoDisplay";
 import Moment from "moment";
 
 const useStyles = makeStyles({
@@ -32,8 +32,8 @@ function FullWeatherCard({ selectedData }) {
     ".png";
 
   return (
-    <Card className="root">
-      <CardContent>
+    <Card>
+      <CardContent style={{ padding: '1rem' }}>
         <Grid container>
           <Grid item xs={12}>
             <Typography
@@ -42,7 +42,7 @@ function FullWeatherCard({ selectedData }) {
               align="center"
               className={classes.title}
             >
-              {Moment(selectedData.applicable_date).format("DD MMMM YYYY")}
+              {Moment(selectedData.applicable_date).format("D MMMM YYYY")}
             </Typography>
           </Grid>
           <Grid
@@ -106,7 +106,7 @@ function FullWeatherCard({ selectedData }) {
           ></InfoDisplay>
         </Grid>
       </CardContent>
-    </Card>
+    </Card >
   );
 }
 
