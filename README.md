@@ -1,5 +1,3 @@
-# Building a Weather app
-
 Our weather app will consist of an [SPA](https://en.wikipedia.org/wiki/Single-page_application) that will display the current forecast details and the next few days' forecast, for a selected location.
 
 Users should be allowed to search for a location. This search will guide our users, displaying possible locations containing the users' query as he types.
