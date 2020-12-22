@@ -1,44 +1,53 @@
 import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
 import SearchBar from "./SearchBar";
-//import WeatherDisplay from "../components/WeatherDisplay/WeatherDisplay";
-import FullWeatherCard from "./FullWeatherCard";
-import WeatherCard from "./WeatherCard";
-import { QueryClient, QueryClientProvider } from 'react-query';
+import Map from "./Map";
+import SmallCards from "./SmallCards";
+import BigCard from "./BigCard";
 import "./App.css";
-import data from "./example_data_location_request.json";
-
-const queryClient = new QueryClient();
 
 const App = () => {
-  const [location, setLocation] = useState("");
-  const [selectedData, setSelectedData] = useState(data.consolidated_weather[0]);
+  const [locationInfo, setLocationInfo] = useState();
+  const [fiveDayWeatherData, setFiveDayWeatherData] = useState();
+  const [selectedDayWeatherData, setSelectedDayWeatherData] = useState();
+
+  const updateLocation = (locationInfo) => {
+    setLocationInfo(locationInfo);
+    if (locationInfo && locationInfo.woeid) {
+      let woeid = locationInfo.woeid;
+      fetch(`http://localhost:8010/proxy/api/location/${woeid}`)
+        .then(res => res.json())
+        .then(data => {
+          setFiveDayWeatherData(data.consolidated_weather);
+          setSelectedDayWeatherData(data.consolidated_weather[0]);
+        })
+    }
+  }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <>
-        <div id="search-bar" style={{ margin: '1rem' }}>
-          <SearchBar onChange={setLocation}></SearchBar>
+    <>
+      <div style={{ margin: '1rem' }}>
+        <SearchBar updateLocation={updateLocation} />
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '400px auto', columnGap: '1rem', gridTemplateRows: 'auto auto', rowGap: '1rem', margin: '1rem' }}>
+        <div style={{ gridRowStart: '1', gridRowEnd: '3' }}>
+          {locationInfo &&
+            <Map latt_long={locationInfo.latt_long} />
+          }
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '400px auto', columnGap: '1rem', gridTemplateRows: 'auto auto', rowGap: '1rem', margin: '1rem' }}>
-          <div id="map" style={{ gridRowStart: '1', gridRowEnd: '3', backgroundColor: 'red' }}>
-            <h1>mapa</h1>
-          </div>
-          <div>
-            <div id="small-cards" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, auto)', columnGap: '1rem' }}>
-              {
-                data.consolidated_weather.slice(0, 5).map(data => {
-                  return (<WeatherCard key={data.id} data={data} setSelectedData={setSelectedData} />);
-                })
-              }
-            </div>
-          </div>
-          <div id="big-card">
-            <FullWeatherCard selectedData={selectedData}></FullWeatherCard>
+        <div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, auto)', columnGap: '1rem' }}>
+            {fiveDayWeatherData &&
+              <SmallCards fiveDayWeatherData={fiveDayWeatherData} setSelectedDayWeatherData={setSelectedDayWeatherData} />
+            }
           </div>
         </div>
-      </>
-    </QueryClientProvider >
+        <div>
+          {selectedDayWeatherData &&
+            <BigCard selectedDayWeatherData={selectedDayWeatherData} />
+          }
+        </div>
+      </div>
+    </>
   );
 }
 
