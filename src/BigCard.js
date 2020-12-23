@@ -1,28 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import InfoDisplay from "./InfoDisplay";
 import Moment from "moment";
 
-const useStyles = makeStyles({
-    icon: {
-        height: 200,
-        marginBottom: 40,
-        marginTop: 20
-    },
-    title: {
-        margin: 20
-    },
-    temp: {
-        paddingRight: 30
-    }
-});
-
 const BigCard = ({ selectedDayWeatherData }) => {
-    const classes = useStyles();
 
     const imageLink =
         "https://www.metaweather.com/static/img/weather/png/" +
@@ -30,9 +11,32 @@ const BigCard = ({ selectedDayWeatherData }) => {
         ".png";
 
     return (
-        <Card style={{ height: '20rem' }}>
-            <CardContent style={{ padding: '1rem' }}>
-                <Grid container>
+        <Card style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+            <Typography variant="h3" component="h3" align="center">
+                {Moment(selectedDayWeatherData.applicable_date).format("D MMMM YYYY")}
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                <Typography variant="h2" component="h3" align="right">
+                    {selectedDayWeatherData.the_temp.toFixed(2)} ºC
+                </Typography>
+                <Typography variant="h5" component="p">
+                    Max: {selectedDayWeatherData.max_temp.toFixed(2)} ºC<br />
+                    Min: {selectedDayWeatherData.min_temp.toFixed(2)} ºC
+                </Typography>
+                <img
+                    width="20%" height="auto"
+                    src={imageLink}
+                    alt={selectedDayWeatherData.weather_state_name}
+                />
+            </div>
+        </Card>
+    );
+}
+
+export default BigCard;
+
+{/*
+<Grid container>
                     <Grid item xs={12}>
                         <Typography
                             variant="h3"
@@ -103,9 +107,4 @@ const BigCard = ({ selectedDayWeatherData }) => {
                         size={4}
                     ></InfoDisplay>
                 </Grid>
-            </CardContent>
-        </Card >
-    );
-}
-
-export default BigCard;
+*/}

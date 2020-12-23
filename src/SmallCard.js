@@ -12,16 +12,22 @@ const SmallCard = ({ data, setSelectedDayWeatherData }) => {
         ".png";
 
     return (
-        <Card style={{ textAlign: 'center', cursor: "pointer" }}>
-            <CardContent onClick={() => setSelectedDayWeatherData(data)} style={{ padding: '1rem' }}>
-                <Typography variant="h5" component="h2">
-                    {Moment(data.applicable_date).format("D MMM")}
+        <Card
+            onClick={() => setSelectedDayWeatherData(data)}
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                cursor: "pointer",
+                alignItems: 'center'
+            }}>
+            <Typography variant="h5" component="h2" style={{ margin: '1rem' }}>
+                {Moment(data.applicable_date).format("D MMM")}
+            </Typography>
+            <img width="50%" height="auto" src={imageLink} alt={data.weather_state_name} />
+            <Typography variant="h5" component="h3" style={{ margin: '1rem' }}>
+                {data.the_temp.toFixed(2)} ºC
                 </Typography>
-                <img width="50%" height="auto" src={imageLink} alt={data.weather_state_name} style={{ margin: '1rem' }} />
-                <Typography variant="h5" component="h3">
-                    {data.the_temp.toFixed(2)} ºC
-          </Typography>
-            </CardContent>
         </Card>
     );
 }

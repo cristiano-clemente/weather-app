@@ -14,7 +14,8 @@ const App = () => {
     setLocationInfo(locationInfo);
     if (locationInfo && locationInfo.woeid) {
       let woeid = locationInfo.woeid;
-      fetch(`http://localhost:8010/proxy/api/location/${woeid}`)
+      //fetch(`http://localhost:8010/proxy/api/location/${woeid}`)
+      fetch(`www.metaweather.com/api/location/${woeid}`)
         .then(res => res.json())
         .then(data => {
           setFiveDayWeatherData(data.consolidated_weather);
@@ -24,30 +25,50 @@ const App = () => {
   }
 
   return (
-    <>
-      <div style={{ margin: '1rem' }}>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 2fr',
+      columnGap: '1rem',
+      gridTemplateRows: 'auto auto 1fr',
+      rowGap: '1rem',
+      height: '100vh',
+    }}>
+      <div div style={{
+        gridColumnStart: 1,
+        gridColumnEnd: 3,
+        margin: '1rem 1rem 0 1rem'
+      }}>
         <SearchBar updateLocation={updateLocation} />
+      </div >
+      <div style={{
+        gridRowStart: '2',
+        gridRowEnd: '4',
+        margin: '0 0 1rem 1rem'
+      }}>
+        {locationInfo &&
+          <Map latt_long={locationInfo.latt_long} />
+        }
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '400px auto', columnGap: '1rem', gridTemplateRows: 'auto auto', rowGap: '1rem', margin: '1rem' }}>
-        <div style={{ gridRowStart: '1', gridRowEnd: '3' }}>
-          {locationInfo &&
-            <Map latt_long={locationInfo.latt_long} />
-          }
-        </div>
-        <div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, auto)', columnGap: '1rem', height: '13rem' }}>
-            {fiveDayWeatherData &&
-              <SmallCards fiveDayWeatherData={fiveDayWeatherData} setSelectedDayWeatherData={setSelectedDayWeatherData} />
-            }
-          </div>
-        </div>
-        <div style={{ height: '20rem' }}>
-          {selectedDayWeatherData &&
-            <BigCard selectedDayWeatherData={selectedDayWeatherData} />
-          }
-        </div>
+      <div style={{
+        gridRowStart: '2',
+        gridColumnStart: '2',
+        margin: '0 1rem 0 0'
+      }}
+      >
+        {fiveDayWeatherData &&
+          <SmallCards fiveDayWeatherData={fiveDayWeatherData} setSelectedDayWeatherData={setSelectedDayWeatherData} />
+        }
       </div>
-    </>
+      <div style={{
+        gridRowStart: '3',
+        gridColumnStart: '2',
+        margin: '0 1rem 1rem 0',
+      }}>
+        {selectedDayWeatherData &&
+          <BigCard selectedDayWeatherData={selectedDayWeatherData} />
+        }
+      </div>
+    </div>
   );
 }
 
