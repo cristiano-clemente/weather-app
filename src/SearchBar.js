@@ -7,7 +7,7 @@ const SearchBar = ({ updateLocation }) => {
 
   const updateOptions = (newInput) => {
     //fetch(`http://localhost:8010/proxy/api/location/search/?query=${newInput}`)
-    fetch(`http://www.metaweather.com/api/location/search/?query=${newInput}`)
+    fetch(`https://www.metaweather.com/api/location/search/?query=${newInput}`)
       .then(res => res.json())
       .then(data => setOptions(data))
   }

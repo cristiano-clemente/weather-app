@@ -15,7 +15,7 @@ const App = () => {
     if (locationInfo && locationInfo.woeid) {
       let woeid = locationInfo.woeid;
       //fetch(`http://localhost:8010/proxy/api/location/${woeid}`)
-      fetch(`www.metaweather.com/api/location/${woeid}`)
+      fetch(`https://www.metaweather.com/api/location/${woeid}`)
         .then(res => res.json())
         .then(data => {
           setFiveDayWeatherData(data.consolidated_weather);
