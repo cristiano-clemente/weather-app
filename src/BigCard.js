@@ -30,7 +30,7 @@ const BigCard = ({ selectedDayWeatherData }) => {
         ".png";
 
     return (
-        <Card>
+        <Card style={{ height: '20rem' }}>
             <CardContent style={{ padding: '1rem' }}>
                 <Grid container>
                     <Grid item xs={12}>

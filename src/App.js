@@ -35,13 +35,13 @@ const App = () => {
           }
         </div>
         <div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, auto)', columnGap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, auto)', columnGap: '1rem', height: '13rem' }}>
             {fiveDayWeatherData &&
               <SmallCards fiveDayWeatherData={fiveDayWeatherData} setSelectedDayWeatherData={setSelectedDayWeatherData} />
             }
           </div>
         </div>
-        <div>
+        <div style={{ height: '20rem' }}>
           {selectedDayWeatherData &&
             <BigCard selectedDayWeatherData={selectedDayWeatherData} />
           }
