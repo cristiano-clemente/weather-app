@@ -13,9 +13,11 @@ const App = () => {
   const updateLocation = (locationInfo) => {
     setLocationInfo(locationInfo);
     if (locationInfo && locationInfo.woeid) {
-      let woeid = locationInfo.woeid;
       //fetch(`http://localhost:8010/proxy/api/location/${woeid}`)
-      fetch(`https://www.metaweather.com/api/location/${woeid}`)
+      fetch(
+        "https://cors-anywhere.herokuapp.com/" +
+        `https://www.metaweather.com/api/location/${locationInfo.woeid}`
+      )
         .then(res => res.json())
         .then(data => {
           setFiveDayWeatherData(data.consolidated_weather);
