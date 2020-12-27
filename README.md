@@ -8,12 +8,10 @@ We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provi
 
 ![](weather-app.png)
 
-## Built with
-
-[moment](https://momentjs.com/)
-
-[material-ui](https://material-ui.com/)
-
-[local-cors-proxy](https://github.com/garmeeh/local-cors-proxy#readme) | [cors-anywhere](https://github.com/Rob--W/cors-anywhere/#documentation)
-
-[react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl) + [mapbox-gl](https://docs.mapbox.com/mapbox-gl-js/api/)
+| Solution | Usefulness |
+| :- | :- |
+| [Moment.js](https://momentjs.com/) | Parse, validate, manipulate, and display dates and times in JavaScript. |
+| [Material-UI](https://material-ui.com/) | React components for faster and easier web development. |
+| ~~[Local CORS Proxy](https://github.com/garmeeh/local-cors-proxy#readme)~~ | ~~Simple proxy to bypass CORS issues. This was built as a local dev only solution to enable prototyping against existing APIs without having to worry about CORS.~~ |
+| [CORS Anywhere](https://github.com/Rob--W/cors-anywhere/#documentation) | CORS Anywhere is a NodeJS proxy which adds CORS headers to the proxied request. |
+| [React Mapbox GL](https://github.com/alex3165/react-mapbox-gl) + [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) | React wrapper for Mapbox GL JS - a JavaScript library that uses WebGL to render interactive maps from vector tiles and Mapbox styles. |
