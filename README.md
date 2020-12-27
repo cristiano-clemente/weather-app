@@ -2,9 +2,9 @@ My "Weather App" consists of an [SPA](https://en.wikipedia.org/wiki/Single-page_
 
 Users should be allowed to search for a location. This search will guide the users, displaying possible locations containing the users' query as he types.
 
-Upon selecting a location, he should be able to check the forecast for the next 5 days and the details of today's weather report.
+Upon selecting a location, he/she should be able to check the forecast for the next 5 days and the details of today's weather report.
 
-We will rely on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
+The app relies on [MetaWeather](https://www.metaweather.com/api/)'s data. It provides endpoints to search for a location from a provided query string and another to fetch the weather report of a location, through its [WOEID](https://en.wikipedia.org/wiki/WOEID) - _Where on Earth ID_.
 
 ![](weather-app.png)
 
